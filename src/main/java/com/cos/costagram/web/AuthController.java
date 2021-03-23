@@ -31,6 +31,6 @@ public class AuthController {
 	public @ResponseBody String join(UserJoinReqDto userJoinReqDto) {
 		User userEntity = userJoinReqDto.toEntity();
 		authService.회원가입(userEntity);
-		return Script.href("성공", "/auth/loginForm");
+		return Script.href("성공", "loginForm");
 	}
 }
