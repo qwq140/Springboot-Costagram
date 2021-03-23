@@ -1,15 +1,18 @@
-package com.cos.costagram.domain.user;
+package com.cos.costagram.domain.likes;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.cos.costagram.domain.image.Image;
+import com.cos.costagram.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -22,30 +25,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class User {
-
+public class Likes {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(length = 30, unique = true)
-	private String username;
+	@ManyToOne
+	@JoinColumn(name="imageId")
+	private Image image;
 	
-	@JsonIgnore
-	private String password;
-	
-	private String name; // 이름
-	private String webSite; // 자기 홈페이지
-	private String bio; // 자기소개
-	private String email;
-	private String phone;
-	private String gender;
-	
-	private String profileImageUrl;
-	private String provider; // 제공자 Google, Facebook, Naver OAuth login
-	
-	private String role; //USER, ADMIN
-	
+	@ManyToOne
+	@JoinColumn(name="userId")
+	private User user;
+
 	@CreationTimestamp
 	private Timestamp createDate;
 }
