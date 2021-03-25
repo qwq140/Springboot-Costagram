@@ -13,32 +13,30 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.costagram.domain.image.Image;
 import com.cos.costagram.domain.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
+@Data
 public class Likes {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id; 
 	
 	@ManyToOne
-	@JoinColumn(name="imageId")
+	@JoinColumn(name = "imageId")
 	private Image image;
 	
 	@ManyToOne
-	@JoinColumn(name="userId")
+	@JoinColumn(name = "userId")
 	private User user;
-
+	
 	@CreationTimestamp
 	private Timestamp createDate;
 }

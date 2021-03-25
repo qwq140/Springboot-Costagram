@@ -19,5 +19,4 @@ public class UserJoinReqDto {
 				.name(name)
 				.build();
 	}
-	
 }

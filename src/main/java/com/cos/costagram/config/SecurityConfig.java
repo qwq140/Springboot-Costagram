@@ -16,14 +16,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
-	// model : Image, User, Likes, Follow, Tag : need authentication 
-	// auth address : don't need authentication
-	// static
+	// 모델 : Image, User, Likes, Follow, Tag : 인증 필요함.
+	// auth 주소 : 인증 필요없음.
+	// static 폴더
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests()
-			.antMatchers("/", "/user/**", "/image/**","/comment/** ","/follow/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+			.antMatchers("/", "/user/**", "/image/**", "/follow/**, /comment/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest()
 			.permitAll()
@@ -32,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.loginPage("/auth/loginForm")
 			.loginProcessingUrl("/login") // post /login 주소를 디스패처 확인하면 필터가 낚아챔
 			.defaultSuccessUrl("/");
-			// OAuth2.0과 CORS는 나중에
+			// OAuth2.0과 CORS는 나중에!!
 	}
-	
 }

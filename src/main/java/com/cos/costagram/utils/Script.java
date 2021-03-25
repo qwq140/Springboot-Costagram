@@ -2,25 +2,23 @@ package com.cos.costagram.utils;
 
 public class Script {
 	
-	// 메시지를 표시하고 싶을 때 사용
 	public static String href(String msg, String url) {
-		StringBuilder sb = new StringBuilder(); 
+		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
 		sb.append("alert('"+msg+"');");
-		sb.append("location.href='"+url+"';");
+		sb.append("location.href = '"+url+"';");
 		sb.append("</script>");
-		
+
 		return sb.toString();
 	}
-	
+
 	public static String back(String msg) {
-		StringBuilder sb = new StringBuilder(); 
+		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
-		sb.append("alert('"+msg+"')");
+		sb.append("alert('"+msg+"');");
 		sb.append("history.back();");
 		sb.append("</script>");
-		
+
 		return sb.toString();
 	}
-	
 }

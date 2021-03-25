@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.costagram.config.auth.PrincipalDetails;
-import com.cos.costagram.domain.follow.Follow;
 import com.cos.costagram.service.FollowService;
 import com.cos.costagram.web.dto.CMRespDto;
 
@@ -19,15 +18,15 @@ public class FollowController {
 
 	private final FollowService followService;
 	
-	@PostMapping("/follow/{toUserid}")
-	public CMRespDto<?> follow(@AuthenticationPrincipal PrincipalDetails principalDetails , @PathVariable int toUserid) {
-		int result = followService.팔로우(principalDetails.getUser().getId(), toUserid);
-		return new CMRespDto<>(1,result);
+	@PostMapping("/follow/{toUserId}") // /follow/3
+	public CMRespDto<?> follow(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
+		int result = followService.팔로우(principalDetails.getUser().getId(), toUserId);
+		return new CMRespDto<>(1, result);
 	}
 	
-	@DeleteMapping("/follow/{toUserid}")
-	public CMRespDto<?> unFollow(@AuthenticationPrincipal PrincipalDetails principalDetails , @PathVariable int toUserid) {
-		int result = followService.언팔로우(principalDetails.getUser().getId(), toUserid);
-		return new CMRespDto<>(1,result);
+	@DeleteMapping("/follow/{toUserId}") // /follow/3
+	public CMRespDto<?> unFollow(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
+		int result = followService.언팔로우(principalDetails.getUser().getId(), toUserId);
+		return new CMRespDto<>(1, result);
 	}
 }

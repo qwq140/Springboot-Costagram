@@ -8,13 +8,13 @@ import com.cos.costagram.domain.follow.FollowRepository;
 
 import lombok.RequiredArgsConstructor;
 
+
 @RequiredArgsConstructor
 @Service
 public class FollowService {
 	
 	private final FollowRepository followRepository;
 	
-	// 네이티브 쿼리 사용
 	@Transactional
 	public int 팔로우(int fromUserId, int toUserId) {
 		return followRepository.mFollow(fromUserId, toUserId);
@@ -22,6 +22,6 @@ public class FollowService {
 	
 	@Transactional
 	public int 언팔로우(int fromUserId, int toUserId) {
-		return followRepository.mUnfollow(fromUserId, toUserId);
+		return followRepository.mUnFollow(fromUserId, toUserId);
 	}
 }

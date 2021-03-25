@@ -14,18 +14,18 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class PrincipalDetailsService implements UserDetailsService{
 
-	private final UserRepository userRepository;
+private final UserRepository userRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("로그인 진행중");
-		User principal = userRepository.findByUsername(username);
-		System.out.println(principal);
+		System.out.println("로그인 진행중 .......");
+		User userEntity = userRepository.findByUsername(username);
 		
-		if(principal==null) {
+		if(userEntity == null) {
 			return null;
-		} else {
-			return new PrincipalDetails(principal); // SecurityContextHolder => Authentication 객체 내부에 담김.
+		}else {
+			return new PrincipalDetails(userEntity); // SecurityContextHolder => Authentication 객체 내부에 담김.
 		}
+		
 	}
 }

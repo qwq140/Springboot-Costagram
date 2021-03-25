@@ -20,34 +20,32 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
+@Data
 public class User {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id; 
 	
 	@Column(length = 30, unique = true)
 	private String username;
-	
 	@JsonIgnore
 	private String password;
 	
 	private String name; // 이름
-	private String webSite; // 자기 홈페이지
+	private String website; // 자기 홈페이지
 	private String bio; // 자기소개
 	private String email;
 	private String phone;
 	private String gender;
 	
 	private String profileImageUrl;
-	private String provider; // 제공자 Google, Facebook, Naver OAuth login
+	private String provider; // 제공자 Google, Facebook, Naver
 	
-	private String role; //USER, ADMIN
+	private String role; // USER, ADMIN
 	
 	@OneToMany(mappedBy = "user")
 	private List<Image> images;
