@@ -13,9 +13,9 @@
 ```xml
 <!-- 시큐리티 태그 라이브러리 -->
 <dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-taglibs</artifactId>
-	</dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-taglibs</artifactId>
+</dependency>
 
 <!-- JSP 템플릿 엔진 -->
 <dependency>
