@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface FollowRepository extends JpaRepository<Follow, Integer>{
 	
-	// write (@Modifying)
+		// write (@Modifying)
 		@Modifying
 		@Query(value = "INSERT INTO follow(fromUserId, toUserId, createDate) VALUES(:fromUserId, :toUserId, now())", nativeQuery = true)
 		int mFollow(int fromUserId, int toUserId); // prepareStatement updateQuery() => -1 0 1
@@ -16,4 +16,10 @@ public interface FollowRepository extends JpaRepository<Follow, Integer>{
 		@Modifying
 		@Query(value = "DELETE FROM follow WHERE fromUserId = :fromUserId AND toUserId = :toUserId", nativeQuery = true)
 		int mUnFollow(int fromUserId, int toUserId); // prepareStatement updateQuery() => -1 0 1
+		
+		@Query(value = "select count(*) from follow where fromUserId = :userId", nativeQuery = true)
+		int followCount(int userId);
+		
+		@Query(value = "select if(f.fromUserId = :principalId AND f.toUserId = :userId, true, false) as state from follow f",nativeQuery = true)
+		int followState(int userId, int principalId);
 }
