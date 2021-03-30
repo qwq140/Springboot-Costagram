@@ -15,6 +15,7 @@ import com.cos.costagram.domain.user.User;
 import com.cos.costagram.service.FollowService;
 import com.cos.costagram.service.UserService;
 import com.cos.costagram.web.dto.CMRespDto;
+import com.cos.costagram.web.dto.follow.FollowListRespDto;
 import com.cos.costagram.web.dto.user.UserProfileRespDto;
 
 import lombok.RequiredArgsConstructor;
@@ -38,9 +39,9 @@ public class UserController {
 		return "user/profileSetting";
 	}
 	
-	@GetMapping("/user/{userId}/follow")
-	public @ResponseBody CMRespDto<?> followList(@PathVariable int userId){
-		List<Follow> followList = followService.팔로우리스트(userId);
+	@GetMapping("/user/{pageUserId}/follow")
+	public @ResponseBody CMRespDto<?> followList(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails){
+		List<FollowListRespDto> followList = followService.팔로우리스트(pageUserId, principalDetails.getUser().getId());
 		return new CMRespDto<>(1,followList);
 	}
 }

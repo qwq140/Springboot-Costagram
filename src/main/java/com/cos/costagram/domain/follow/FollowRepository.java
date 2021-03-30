@@ -22,9 +22,7 @@ public interface FollowRepository extends JpaRepository<Follow, Integer>{
 		@Query(value = "select count(*) from follow where fromUserId = :userId", nativeQuery = true)
 		int followCount(int userId);
 		
-		@Query(value = "select if(f.fromUserId = :principalId AND f.toUserId = :userId, true, false) as state from follow f",nativeQuery = true)
+		@Query(value = "select count(*) from follow where fromUserId = :principalId AND toUserId = :userId", nativeQuery = true)
 		int followState(int userId, int principalId);
 		
-		// 네이밍 쿼리(JPA가 제공해주는 것) = 간단한 쿼리
-		List<Follow> findByFromUserId(int userId);
 }
