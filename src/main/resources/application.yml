@@ -37,4 +37,4 @@ spring:
       password: 1234   
 
 file:
-  path: C:/src/instagram/src/main/resources/upload/
+  path: C:/Users/jap/Desktop/workspace/springwork/costagram/src/main/resources/upload/

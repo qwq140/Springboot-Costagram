@@ -44,6 +44,7 @@
 				</c:choose>
 			</div>
 			<div class="follow">
+				<input type="hidden" value="${dto.user.id }" id="userId">
 				<ul>
 					<li><a href="">게시물<span>${dto.imageCount }</span></a></li>
 					<li><a href="" id="subscribeBtn">구독정보<span>${dto.followCount }</span></a>
@@ -72,7 +73,7 @@
 				<!--아이템들-->
 				<c:forEach var="image" items="${dto.user.images }">
 					<div class="img-box">
-						<a href=""><img src="/images/profile.jpeg" alt=""></a>
+						<a href=""><img src="/upload/${image.postImageUrl }" alt=""></a>
 						<div class="comment">
 							<a href="#a" class=""><i class="fas fa-heart"></i><span>36</span></a>
 						</div>
@@ -119,29 +120,8 @@
 		<!--팔로워 헤더end-->
 
 		<!--팔로워 리스트-->
-		<div class="follower-list">
-			<div class="follower__item">
-				<div class="follower__img">
-					<img src="/images/profile.jpeg" alt="">
-				</div>
-				<div class="follower__text">
-					<h2>아이디</h2>
-				</div>
-				<div class="follower__btn">
-					<button onclick="clickFollow(this)">구독취소</button>
-				</div>
-			</div>
-			<div class="follower__item">
-				<div class="follower__img">
-					<img src="/images/profile.jpeg" alt="">
-				</div>
-				<div class="follower__text">
-					<h2>아이디</h2>
-				</div>
-				<div class="follower__btn">
-					<button onclick="clickFollow(this)">구독취소</button>
-				</div>
-			</div>
+		<div class="follower-list" id="follow_list">
+			
 		</div>
 		<!--팔로워 리스트end-->
 	</div>
@@ -150,5 +130,4 @@
 <!--팔로워 모달end-->
 
 <script src="/js/profile.js"></script>
-
 <%@ include file="../layout/footer.jsp"%>

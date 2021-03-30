@@ -1,7 +1,45 @@
 document.querySelector("#subscribeBtn").onclick = (e) => {
   e.preventDefault();
   document.querySelector(".modal-follow").style.display = "flex";
+  // ajax 통신후에 json 리턴 -> javascript 오브젝트 변경 => for문 돌면서 뿌리기
+  
+  
+  let userId = $("#userId").val();
+  
+  $.ajax({
+  	type:"GET",
+  	url:`/user/${userId}/follow`,
+  	dataType:"json"
+  }).done((res)=>{
+  	$("#follow_list").empty();
+  	res.data.forEach((u)=>{
+  		console.log(2,u);
+  		let item = makeSubscribeInfo(u.toUser.username);
+    	$("#follow_list").append(item);
+  	});
+  }).fail(error=>{
+  	alert("오류 : "+error);
+  });
+  
 };
+
+function makeSubscribeInfo(username){
+	let item=`<div class="follower__item">`;
+	item +=`<div class="follower__img">`;
+	item +=`<img src="/images/profile.jpeg" alt="">`;
+	item +=`</div>`;
+	item +=`<div class="follower__text">`;
+	item +=`<h2>${username}</h2>`;
+	item +=`</div>`;
+	item +=`<div class="follower__btn">`;
+	item +=`<button onclick="clickFollow(this)">구독취소</button>`;
+	item +=`</div>`;
+	item +=`</div>`;
+	
+	return item;
+}
+
+
 function closeFollow() {
   document.querySelector(".modal-follow").style.display = "none";
 }

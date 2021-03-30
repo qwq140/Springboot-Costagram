@@ -1,5 +1,7 @@
 package com.cos.costagram.domain.follow;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +24,7 @@ public interface FollowRepository extends JpaRepository<Follow, Integer>{
 		
 		@Query(value = "select if(f.fromUserId = :principalId AND f.toUserId = :userId, true, false) as state from follow f",nativeQuery = true)
 		int followState(int userId, int principalId);
+		
+		// 네이밍 쿼리(JPA가 제공해주는 것) = 간단한 쿼리
+		List<Follow> findByFromUserId(int userId);
 }
