@@ -12,9 +12,9 @@ public class TagUtils {
 		String temp[] = tags.split("#");
 		List<Tag> list = new ArrayList<>();
 		
-		for(String tagName : temp) {
+		for(int i=1; i<temp.length; i++) {
 			Tag tag = Tag.builder()
-					.name(tagName.trim())
+					.name(temp[i].trim())
 					.image(imageEntity)
 					.build();
 			list.add(tag);
