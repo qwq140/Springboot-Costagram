@@ -35,9 +35,9 @@ function makeSubscribeInfo(u){
 	item +=`<div class="follower__btn">`;
 	if(!u.equalState){
 		if(u.followState){
-			item +=`<button class="cta blue" onClick="followCancel(${u.userId})">구독취소</button>`;
+			item +=`<button class="cta blue" onClick="followOrUnFollow(${u.userId})">구독취소</button>`;
 		} else {
-			item +=`<button class="cta" onClick="follow(${u.userId})">구독하기</button>`;
+			item +=`<button class="cta" onClick="followOrUnFollow(${u.userId})">구독하기</button>`;
 		}
 	}
 	item +=`</div>`;
@@ -47,33 +47,52 @@ function makeSubscribeInfo(u){
 }
 
 function follow(userId){
-	$.ajax({
-		type:"POST",
-		url:`/follow/${userId}`,
-		dataType:"json"
-	}).done((res)=>{
-		console.log(res);
-		$(`#follow-${userId} button`).text("구독취소");
-		$(`#follow-${userId} button`).attr('class','cta blue');
-		$(`#follow-${userId} button`).attr('onClick',`followCancel(${userId})`);
-	}).fail(error=>{
-		alert("오류 : "+error);
-	});
+	let text = $("#btnFollow").text();
+	
+	if(text === "구독취소"){
+		$.ajax({
+			type: "DELETE",
+			url: "/follow/"+userId,
+			dataType: "json"
+		}).done(res=>{
+			$("#btnFollow").text("구독하기");
+			$("#btnFollow").toggleClass("blue");
+		});
+	}else{
+		$.ajax({
+			type: "POST",
+			url: "/follow/"+userId,
+			dataType: "json"
+		}).done(res=>{
+			$("#btnFollow").text("구독취소");
+			$("#btnFollow").toggleClass("blue");
+		});
+	}
+
 }
 
-function followCancel(userId){
-	$.ajax({
-		type:"DELETE",
-		url:`/follow/${userId}`,
-		dataType:"json"
-	}).done((res)=>{
-		console.log(res);
-		$(`#follow-${userId} button`).text("구독하기");
-		$(`#follow-${userId} button`).attr('class','cta');
-		$(`#follow-${userId} button`).attr('onClick',`follow(${userId})`);
-	}).fail(error=>{
-		alert("오류 : "+error);
-	});
+function followOrUnFollow(userId){
+	let text = $(`#follow-${userId} button`).text();
+	
+	if(text === "구독취소"){
+		$.ajax({
+			type: "DELETE",
+			url: "/follow/"+userId,
+			dataType: "json"
+		}).done(res=>{
+			$(`#follow-${userId} button`).text("구독하기");
+			$(`#follow-${userId} button`).toggleClass("blue");
+		});
+	}else{
+		$.ajax({
+			type: "POST",
+			url: "/follow/"+userId,
+			dataType: "json"
+		}).done(res=>{
+			$(`#follow-${userId} button`).text("구독취소");
+			$(`#follow-${userId} button`).toggleClass("blue");
+		});
+	}
 }
 
 
