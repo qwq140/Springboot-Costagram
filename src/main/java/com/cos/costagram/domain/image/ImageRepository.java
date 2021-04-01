@@ -11,7 +11,7 @@ public interface ImageRepository extends JpaRepository<Image, Integer>{
 	List<Image> mFeed(int principalId);
 	
 	
-	@Query(value = "select * from image where id in (select imageId from (select imageId, count(imageId) likeCount from likes where userId = :principalId group by imageId order by 2 desc) t)", nativeQuery = true)
+	@Query(value = "select * from image where id in (select imageId from (select imageId, count(imageId) likeCount from likes group by imageId order by 2 desc) t) and userId != :principalId  ", nativeQuery = true)
 	List<Image> mPopular(int principalId);
 	
 }
