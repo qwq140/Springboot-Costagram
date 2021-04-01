@@ -8,11 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.costagram.domain.image.Image;
 import com.cos.costagram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +27,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Data
+@Table(
+		name="likes",
+		uniqueConstraints={
+			@UniqueConstraint(
+				name = "likes_uk",
+				columnNames={"imageId","userId"}
+			)
+		}
+	) // 중복되면 안되므로 제약조건 넣기
 public class Likes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +44,7 @@ public class Likes {
 	@ManyToOne
 	@JoinColumn(name = "imageId")
 	private Image image;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")

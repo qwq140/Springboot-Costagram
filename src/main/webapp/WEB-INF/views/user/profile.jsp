@@ -75,7 +75,7 @@
 					<div class="img-box">
 						<a href=""><img src="/upload/${image.postImageUrl }" alt=""></a>
 						<div class="comment">
-							<a href="#a" class=""><i class="fas fa-heart"></i><span>36</span></a>
+							<a href="#a" class=""><i class="fas fa-heart"></i><span>${image.likeCount }</span></a>
 						</div>
 					</div>
 				</c:forEach>
