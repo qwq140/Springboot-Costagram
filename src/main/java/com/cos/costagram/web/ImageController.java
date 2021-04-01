@@ -1,5 +1,7 @@
 package com.cos.costagram.web;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.costagram.config.auth.PrincipalDetails;
+import com.cos.costagram.domain.image.Image;
 import com.cos.costagram.service.ImageService;
 import com.cos.costagram.service.LikesService;
 import com.cos.costagram.web.dto.CMRespDto;
@@ -39,7 +42,10 @@ public class ImageController {
 	}
 	
 	@GetMapping("/image/explore")
-	public String explore() {
+	public String explore(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		List<Image> images = imageService.인기사진(principalDetails.getUser().getId());
+		model.addAttribute("images", images);
 		return "image/explore";
 	}
 	

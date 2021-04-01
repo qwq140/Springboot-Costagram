@@ -80,4 +80,9 @@ public class ImageService {
 		List<Tag> tagNames = TagUtils.parsingToTagObject(imageReqDto.getTags(),imageEntity);
 		tagRepository.saveAll(tagNames);
 	}
+	
+	@Transactional
+	public List<Image> 인기사진(int principalId){
+		return imageRepository.mPopular(principalId);
+	}
 }
