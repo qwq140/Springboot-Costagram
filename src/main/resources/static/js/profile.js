@@ -27,7 +27,7 @@ document.querySelector("#subscribeBtn").onclick = (e) => {
 function makeSubscribeInfo(u){
 	let item=`<div class="follower__item" id="follow-${u.userId}">`;
 	item +=`<div class="follower__img">`;
-	item +=`<img src="/images/profile.jpeg" alt="">`;
+	item +=`<img src="/upload/${u.profileImageUrl}" alt=""  onerror="this.src='/images/person.png'"/>`;
 	item +=`</div>`;
 	item +=`<div class="follower__text">`;
 	item +=`<h2>${u.username}</h2>`;
@@ -45,6 +45,8 @@ function makeSubscribeInfo(u){
 	
 	return item;
 }
+
+
 
 function follow(userId){
 	let text = $("#btnFollow").text();
@@ -122,3 +124,24 @@ document.querySelector(".modal-image").addEventListener("click", (e) => {
     document.querySelector(".modal-image").style.display = "none";
   }
 });
+
+// 회원정보 수정
+function update(userId){
+    	event.preventDefault();
+    	let data = $("#profile_setting").serialize();
+    	
+    	$.ajax({
+			type:"PUT",
+			url:"/user/"+userId,
+			data:data,
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			dataType:"json"
+		}).done((res)=>{
+			console.log(res);
+			if(res.statusCode===1){
+				location.href="/user/"+userId;
+			} else {
+				alert("수정에 실패하였습니다.")
+			}
+		});
+}
