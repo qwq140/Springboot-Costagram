@@ -45,7 +45,7 @@ public class Likes {
 	@JoinColumn(name = "imageId")
 	private Image image;
 	
-	
+	@JsonIgnoreProperties({"images"})
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;

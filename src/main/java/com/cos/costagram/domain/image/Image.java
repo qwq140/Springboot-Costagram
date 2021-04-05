@@ -40,16 +40,20 @@ public class Image {
 	
 
 	@ManyToOne
+	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name = "userId")
 	private User user;
 	
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
 	private List<Tag> tags;
 	
 
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
 	private List<Likes> likes; // A이미지에 홍길동, 장보고, 임꺽정 좋아요.   (고소영)
 
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
 	private List<Comment> comments;
 	
