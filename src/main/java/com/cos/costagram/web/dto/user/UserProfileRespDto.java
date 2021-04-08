@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserProfileRespDto {
 
-	private int followState;
+	private boolean followState;
 	private int followCount;
 	private int imageCount;
 	private User user;
