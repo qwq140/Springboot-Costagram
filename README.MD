@@ -86,3 +86,6 @@ file:
 ### 태그 라이브러리
 - <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 - <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+### 영상 링크
+https://youtu.be/LeJV736a7NU
